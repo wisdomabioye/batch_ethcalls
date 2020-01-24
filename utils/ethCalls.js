@@ -4,7 +4,7 @@ let web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v
 let multicallAbi = require("../abi/multicall.json"); // multicall abi
 let multicallContractAddress = "0xeefba1e63905ef1d7acba5a8513c70307c1ce441"; //Mainnet contract Address
 
-export function aggregateCalls(calls) {
+export function aggregateCalls(calls /*Array*/) {
 	let aggregateCallsArg = calls.map(function(call) {
 		return {
 			target: call.contractAddress,
@@ -19,7 +19,12 @@ export function aggregateCalls(calls) {
 		methodArgs: [aggregateCallsArg]
 	})
 
-	return ethCall(multicallContractAddress, aggregateCallsData);
+	return ethCall(multicallContractAddress, aggregateCallsData)
+			.then(response => {
+				let decodedResponse = web3.eth.abi.decodeParameters(["uint256", "bytes[]"], response);
+				return decodedResponse;
+			})
+			.catch(error => error);
 }
 
 export function ethCall(contractAddress, callData) {
@@ -29,8 +34,7 @@ export function ethCall(contractAddress, callData) {
 			data: callData
 		})
 		.then(function(response) {
-			let decodedResponse = web3.eth.abi.decodeParameters(["uint256", "bytes[]"], response);
-			resolve(decodedResponse);
+			resolve(response);
 		})
 		.catch(function(error) {
 			reject(error);
