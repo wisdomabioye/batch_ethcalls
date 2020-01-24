@@ -4,7 +4,7 @@ out
 .next
 now.json
 .nowignore
-
+next.config.js
 # dependencies
 node_modules
 package-lock.json
