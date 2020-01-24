@@ -9,16 +9,20 @@ export default function AggregateCalls(props) {
 	let [result, setResult] = useState(null);
 	let [error, setError] = useState(null);
 	let [isLoading, setIsLoading] = useState(true);
+	
 	useEffect(() => {
+		resetState();
 		init(props);	
 	}, [])
 	
-	function init(callProps) {
+	function resetState() {
 		setResult(null);
 		setError(null);
 		setIsLoading(true);
+	}
 
-		makeCall(calls(callProps))
+	function init(addresses) {
+		makeCall(calls(addresses))
 		.then(res => setResult(res))
 		.catch(error => {
 			console.log(error);
@@ -40,7 +44,7 @@ export default function AggregateCalls(props) {
 					<h3 className="has-text-centered">Time taken: {result.time} milliseconds</h3>
 					<h3 className="mt-2 mb-2">Block: {result.block}</h3>
 
-					<ul>
+					<ol>
 						{
 							Object.keys(result.response).map( (key, i) => (
 								<li className="mt-2" key={i}>
@@ -48,7 +52,7 @@ export default function AggregateCalls(props) {
 								</li>
 							))
 						}
-					</ul>
+					</ol>
 				</div>
 
 			}
@@ -67,7 +71,6 @@ async function makeCall(calls) {
 	let t0 = window.performance.now(); //start time
 	let result = await aggregateCalls(calls);
 	let t1 = window.performance.now(); // end time
-	console.log(result);
 	let block = result[0];
 	let callResults = result[1];
 

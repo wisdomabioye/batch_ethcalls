@@ -39,7 +39,7 @@ export default function SingleCall(props) {
 				result &&
 				<div>
 					<h3 className="has-text-centered">Time taken: {result.time} milliseconds</h3>
-					<ul>
+					<ol>
 						{
 							Object.keys(result.response).map( (key, i) => (
 								<li className="mt-2" key={i}>
@@ -47,7 +47,7 @@ export default function SingleCall(props) {
 								</li>
 							))
 						}
-					</ul>
+					</ol>
 				</div>
 
 			}

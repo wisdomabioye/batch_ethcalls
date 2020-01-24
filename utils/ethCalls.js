@@ -1,7 +1,7 @@
-let Web3 = require("web3")
-let web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/" + process.env.INFURA_KEY));
+import Web3 from "web3";
+import multicallAbi from "../abi/multicall.json"; // multicall abi
 
-let multicallAbi = require("../abi/multicall.json"); // multicall abi
+let web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/v3/" + process.env.INFURA_KEY));
 let multicallContractAddress = "0xeefba1e63905ef1d7acba5a8513c70307c1ce441"; //Mainnet contract Address
 
 export function aggregateCalls(calls /*Array*/) {

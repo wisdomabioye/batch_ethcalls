@@ -15,21 +15,21 @@ export default function Index() {
 	let [formData, setFormDate] = useState(defaultAddresses);
 	
 	useEffect(() => {
-
+		console.log("changed!!")
 	}, [addresses])
 
 	function handleChange(e) {
 		let {name, value} = e.target;
 
-		setFormDate({
-			...formData,
+		setAddresses({
+			...addresses,
 			[name]: value
 		})
 	}
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		setAddresses({...formData});
+		// setAddresses({...formData});
 	}
 
 	return (
@@ -38,7 +38,7 @@ export default function Index() {
 				<title>{appInfo.name}</title>
 			</Head>
 			<h1 className="has-text-centered is-size-4 mb-4">
-				Multi eth.calls (Aggregate) <strong>  vs </strong>Single call
+				Multi eth_calls (Aggregate) <strong>  vs </strong>Single call
 			</h1>
 			<form className="columns is-centered is-vcentered" onSubmit={handleSubmit}>
 				<div className="column is-4">
@@ -47,7 +47,7 @@ export default function Index() {
 						name="contractAddress"
 						placeholder="Contract Address"
 						onChange={handleChange}
-						value={formData.contractAddress}
+						value={addresses.contractAddress}
 					/>
 				</div>
 				<div className="column is-4">
@@ -56,7 +56,7 @@ export default function Index() {
 						name="ethAddress"
 						placeholder="Ethereum Address"
 						onChange={handleChange}
-						value={formData.ethAddress}
+						value={addresses.ethAddress}
 					/>
 				</div>
 				<div className="column is-2 mt-4">
