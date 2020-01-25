@@ -8,21 +8,22 @@ export default function SingleCall(props) {
 	let [result, setResult] = useState(null);
 	let [error, setError] = useState(null);
 	let [isLoading, setIsLoading] = useState(true);
-
 	
 	useEffect(() => {
-		init();	
-	}, [])
+		init(props);
+	}, [props]);
 
-	function init() {
-		setResult(null);
-		setError(null);
+	function resetState() {
 		setIsLoading(true);
+		setError(null);
+		setResult(null);
+	}
 
-		makeCall(calls(props))
+	function init(addresses) {
+		resetState();
+		makeCall(calls(addresses))
 		.then(res => setResult(res))
 		.catch(error => {
-			console.log(error);
 			setError(error.message || error);
 		})
 		.finally(() => setIsLoading(false))

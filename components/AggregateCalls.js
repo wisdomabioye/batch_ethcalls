@@ -11,21 +11,20 @@ export default function AggregateCalls(props) {
 	let [isLoading, setIsLoading] = useState(true);
 	
 	useEffect(() => {
-		resetState();
-		init(props);	
-	}, [])
-	
+		init(props);
+	}, [props]);
+
 	function resetState() {
-		setResult(null);
-		setError(null);
 		setIsLoading(true);
+		setError(null);
+		setResult(null);
 	}
 
 	function init(addresses) {
+		resetState();
 		makeCall(calls(addresses))
 		.then(res => setResult(res))
 		.catch(error => {
-			console.log(error);
 			setError(error.message || error);
 		})
 		.finally(() => setIsLoading(false))
