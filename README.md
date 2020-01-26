@@ -1,4 +1,4 @@
-## Aggregate eth_calls in a single one
+## Aggregate `eth_call`s in a single one
 #### This make use of multicall contract (https://github.com/makerdao/multicall)
 
 Chart here: https://live.amcharts.com/mEyZD/ 
@@ -22,7 +22,7 @@ From the demo, one can deduce that
 ### 1. 
 ##### Using the file utils/ethCall.js
 
-js
+```js
 import {aggregateCalls, singleCall} from "../utils/ethCalls";
 // `aggregateCalls` takes an array of object of calls 
 
@@ -63,7 +63,7 @@ async function makeCall(callsProp) {
         }
     */
 } 
-
+```
     
     
     
