@@ -3,7 +3,7 @@
 
 Chart here: https://live.amcharts.com/mEyZD/ 
 
-| Number of eth_Call  | Aggregate call <br>(Average time in milliseconds)  | Single call <br>(Average time in milliseconds)  |       Comment        |
+| Number of eth_Call  | Aggregate call <br>(Time in milliseconds)  | Single call <br>(Time in milliseconds)  |       Comment        |
 |:------------------: |:-------------------------------------------------: |:----------------------------------------------: |:-------------------: |
 |          1          |                       650.3                        |                      611.8                      |   Single is faster   |
 |          2          |                       276.1                        |                     1880.4                      | Aggregate is faster  |
@@ -23,7 +23,7 @@ From the demo, one can deduce that
 ##### Using the file utils/ethCall.js
 
 ```js
-import {aggregateCalls, singleCall} from "../utils/ethCalls";
+import {aggregateCalls} from "../utils/ethCalls";
 // `aggregateCalls` takes an array of object of calls 
 
 let abi = require("abi.json");
