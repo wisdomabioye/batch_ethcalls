@@ -1,13 +1,28 @@
-## Aggregate `eth_call`s in a single one
+## Aggregate eth_calls in a single one
 #### This make use of multicall contract (https://github.com/makerdao/multicall)
 
 Chart here: https://live.amcharts.com/mEyZD/ 
 
+| Number of eth_Call  | Aggregate call <br>(Average time in milliseconds)  | Single call <br>(Average time in milliseconds)  |       Comment        |
+|:------------------: |:-------------------------------------------------: |:----------------------------------------------: |:-------------------: |
+|          1          |                       650.3                        |                      611.8                      |   Single is faster   |
+|          2          |                       276.1                        |                     1880.4                      | Aggregate is faster  |
+|          3          |                       759.9                        |                     1484.9                      | Aggregate is faster  |
+|          4          |                       592.0                        |                     1583.2                      | Aggregate is faster  |
+|          5          |                       613.2                        |                     1822.2                      | Aggregate is faster  |
+|          6          |                       1225.1                       |                     2967.0                      | Aggregate is faster  |
+|          7          |                       931.9                        |                     2871.9                      | Aggregate is faster  |
+
+From the demo, one can deduce that
+- Time taken depend on network/internet speed and machine
+- If the number of call is 1, single call maybe faster
+- The more the number of calls the higher the time taken for a single call to complete while aggregate call stays relatively below 1 seconds on average.
+
 ## How to use
 ### 1. 
-##### Using the file `utils/ethCall.js`
+##### Using the file utils/ethCall.js
 
-```js
+js
 import {aggregateCalls, singleCall} from "../utils/ethCalls";
 // `aggregateCalls` takes an array of object of calls 
 
@@ -48,12 +63,12 @@ async function makeCall(callsProp) {
         }
     */
 } 
-```
+
     
     
     
 ### 2. Run locally
 - Clone this repo
-- Run `npm install`
-- Update `utils/sampleCalls.js` (add or remove method in the `calls` function)
-- Do not forget to import the ABI `.json` file of the contract you will be interacting with. `erc20Abi`is already provided for convenience.
+- Run npm install
+- Update utils/sampleCalls.js (add or remove method in the calls function)
+- Do not forget to import the ABI .json file of the contract you will be interacting with. erc20Abiis already provided for convenience.
